@@ -1,0 +1,10 @@
+MANIFEST
+Changes
+LICENSE
+Makefile.PL
+Build.PL
+META.yml
+README
+lib/Number/Misc.pm
+lib/Number/Misc.pod
+t/test.t
