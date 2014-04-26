@@ -1,10 +1,10 @@
 MANIFEST
 Changes
-LICENSE
-Makefile.PL
-Build.PL
 META.yml
+Makefile.PL
 README
-lib/Number/Misc.pm
-lib/Number/Misc.pod
+Build.PL
+LICENSE
 t/test.t
+lib/Number/Misc.pod
+lib/Number/Misc.pm

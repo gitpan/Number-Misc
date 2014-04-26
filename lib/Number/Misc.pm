@@ -3,7 +3,7 @@ use strict;
 use Carp;
 
 # version
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 
 
 #------------------------------------------------------------------------------
@@ -428,6 +428,10 @@ F<miko@idocs.com>
 =item Version 1.0    July, 2012
 
 Initial release.
+
+=item Version 1.1  April 25, 2014
+
+Fixed problem in META.yml.
 
 =back
 
