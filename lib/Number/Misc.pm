@@ -3,7 +3,7 @@ use strict;
 use Carp;
 
 # version
-our $VERSION = '1.1';
+our $VERSION = '1.2';
 
 
 #------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ Number::Misc - handy utilities for numbers
 =head1 SYNOPSIS
 
  use Number::Misc ':all';
- 
+
  is_numeric('x');        # false
  to_number('3,000');     # 3000
  commafie('3000');       # 3,000
@@ -220,25 +220,50 @@ Converts a number to a string representing the same number but with commas
  commafie(2000.33);  #  2,000.33
  commafie(100);      #    100
 
+B<option: sep>
+
+The C<sep> option lets you set what to use as a separator instead of a comma.
+For example, if you want to C<:> instead of C<,> you would do that like this:
+
+ commafie('2000', sep=>':');
+
+which would give you this:
+
+ 2:000
+
 =cut
 
 sub commafie {
-	my $val = shift;
-	my ($int, $dec, $neg);
+	my ($val, %opts) = @_;
+	my ($int, $dec, $neg, $comma);
 	
+	# default options
+	%opts = (sep=>',', %opts);
+	
+	# set what to use for comma
+	$comma = $opts{'sep'};
+	
+	# remove and note negation
 	$neg = ($val =~ s/^\-//);
 	
+	# get integer and decimal values
 	($int, $dec) = split('\.', $val);
 	
+	# add commas
 	$int = reverse($int);
-	$int =~ s/(\d\d\d)/$1,/g;
+	$int =~ s/(\d\d\d)/$1$comma/g;
 	$int =~ s/,$//;
 	$int = reverse($int);
 	
+	# add back negation if necessary
 	if ($neg)
 		{$int = "-$int"}
+	
+	# add back decimal value if it was present
 	if (defined $dec)
 		{$int .= ".$dec"}	
+	
+	# return
 	return $int;
 }
 #
@@ -432,6 +457,10 @@ Initial release.
 =item Version 1.1  April 25, 2014
 
 Fixed problem in META.yml.
+
+=item Version 1.2 January 2, 2015
+
+Fixed issues in tests.  Added 'sep' option to commafie.
 
 =back
 
